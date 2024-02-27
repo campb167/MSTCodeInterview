@@ -1,0 +1,31 @@
+<div>
+    <app-mst-table [props]="{ 
+        gridTitle: 'Hello there', 
+        gridRows: rowsData, 
+        gridCols: colData, 
+        gripOptions: { includeRowIndex: true },
+        sorting: {
+            order: order,
+            orderBy: orderBy
+        },
+        filtering: {
+            filterField: filterField
+        },
+        pagination: {
+            limit: rowsPerPage,
+            page: page,
+            rowCount: rowData.length,
+            rowsPerPageOptions: rowsPerPageOptions,
+            rowsPerPage: rowsPerPage
+        },
+        gridCallbacks: {
+            onRequestSort: handleRequestSort.bind(this),
+            onRequestFilter: handleRequestFilter.bind(this),
+            onResetFilter: handleResetFilter.bind(this),
+            onPageChange: handlePageChange.bind(this),
+            onRowsPerPageChange: handleRowsPerPageChange.bind(this)
+        }
+        }"
+
+    />
+</div>

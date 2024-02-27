@@ -1,0 +1,68 @@
+.mstTable-container__root {
+    margin: 5px;
+    .mstTable-title__root {
+        min-height: 50px;
+        background: gray;
+        .mstTable-title__text {
+            color: white;
+            font-size: 20px;
+        }
+    }
+    .mstTable-filterToolbar__root {
+        background-color: red;
+    }
+    .mstTable-table__root {
+        width: 100%;
+        border-collapse: collapse;
+        .mstTable-head__root {   
+            background: lightgray;    
+            height: 40px;   
+            .sortingArrow {
+                opacity: 0;
+                width: 20px;
+                font-size: 20px;
+                height: 15px;
+                transition: opacity 0.2s;
+            }
+            .mstTable-col__root {
+                padding: 5px;
+                text-align: left;
+                color: black;
+                font-weight: 500;
+                transition: background-color 0.4s;
+            }
+            .beingSorted {
+                .sortingArrow {
+                    opacity: 1;
+                }
+            }
+            .sortableCol:hover {
+                .sortingArrow {
+                    opacity: 0.5;
+                }
+                background: rgb(222, 222, 222);
+                cursor: pointer;
+            }
+        }
+        .mstTable-body__root {
+            .mstTable-row__root {
+                .mstTable-rowCell__root {
+                    height: 30px;
+                    padding: 5px;
+                }
+            }
+            .mstTable-row__root:hover {
+                background: #ededed;
+            }
+        }
+        .mstTable-foot__root {   
+            background: rgb(242, 242, 242);    
+            height: 40px;   
+
+        }
+        td {
+            border: 1px solid rgb(218, 218, 218)
+        }
+    }
+    
+}

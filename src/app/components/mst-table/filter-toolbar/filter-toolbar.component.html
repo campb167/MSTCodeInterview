@@ -1,0 +1,32 @@
+<div class="mstTable-filterToolbar__root">
+    @if (showToolBar) {
+        <div>
+            <mat-form-field>
+                <mat-select [(value)]="selectedCol" (valueChange)="handleSelectColumn($event)">
+                    <mat-option value="" disabled>Please select a column...</mat-option>
+                    @for (column of columns; track column) {
+                        <mat-option [value]="column.field + '|' + column.title">{{column.title}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            @if (filterField !== '') {
+                <mat-form-field>
+                    <input type="text" matInput value="{{filterValue}}" (input)="handleFilterTextChange($event)">
+                </mat-form-field>
+            }      
+            @if (filterValue !== '') {
+                <button mat-raised-button (click)="handleRequestFilter($event)">Filter</button>
+            }  
+            
+        </div>
+    } @else if (!showToolBar && filterValue !== '') {
+        <mat-chip-row>
+            {{fieldDescription}}
+            <button matChipRemove [attr.aria-label]="'remove ' + fieldDescription" (click)="handleResetFilter($event)">
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </mat-chip-row>
+    }
+    
+    
+</div>

@@ -1,0 +1,81 @@
+<div class="mstTable-container__root">
+    <div class="mstTable-title__root">
+        <div class="mstTable-title__text">
+            {{props.gridTitle}}
+        </div>
+    </div>
+    
+    <table class="mstTable-table__root">
+        <thead class="mstTable-head__root">
+            <tr>
+                <td [attr.colspan]="colData.length">
+                    @if (showToolbar) {
+                        <app-filter-toolbar 
+                            [columns]="colData" 
+                            [filterStatus]="'changme'"
+                            [onRequestFilter]="handleRequestFilter.bind(this)"
+                            [onResetFilter]="handleResetFilter.bind(this)"
+                        />
+                    }
+                </td>
+            </tr>
+            <tr>
+                @for (column of colData; track column) {
+                    
+                    <th 
+                        class="mstTable-col__root mstTable-col-{{column.field}} {{column.isSortable ? 'sortableCol' : ''}} {{column.field == (sorting.orderBy) ? 'beingSorted' : ''}}" 
+                        [attr.style]="column.width ? 'width:'+column.width+'px' : ''"
+                        (click)="handleRequestSort($event, column)"
+                    >
+                        @if (column.field === 'count') {
+                            <button mat-icon-button (click)="handleToggleFilterToolbar()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        } @else {
+                            <span>
+                                {{column.title}}
+                                <span>
+                                    @if (this.props.sorting && this.props.sorting.order === 'asc') {
+                                        <mat-icon class="sortingArrow">arrow_upward</mat-icon>
+                                    } @else {
+                                        <mat-icon class="sortingArrow">arrow_downward</mat-icon>
+                                    }
+                                </span>
+                            </span>
+                        }
+                        
+                        
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody class="mstTable-body__root">
+            @for (row of props.gridRows; track row) {
+                <tr class="mstTable-row__root mstTable-row-{{row['id']}}">
+                    @for (column of colData; track column) {
+                        <td class="mstTable-rowCell__root">
+                            <span [innerHTML]="row[column.field]"></span>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+        <tfoot class="mstTable-foot__root">
+            <tr>
+                <td [attr.colspan]="colData.length">
+                    @if (props.pagination) {
+                        <app-table-pagination 
+                            [rowsPerPageOptions]="props.pagination.rowsPerPageOptions"
+                            [count]="props.pagination.rowCount"
+                            [rowsPerPage]="props.pagination.rowsPerPage"
+                            [page]="props.pagination.page"
+                            [onPageChange]="handlePageChange.bind(this)"
+                            [onRowsPerPageChange]="handleRowsPerPageChange.bind(this)"
+                        />
+                    }
+                    
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
